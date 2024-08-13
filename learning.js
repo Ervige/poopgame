@@ -91,4 +91,76 @@ const map = new Map([
     { 5: 'Neśku'},
 ]); // tablica z obiektami unikalnymi (jeden poziom), gdzie kluczem moze byc element dowolnego typu
 
+console.log('------------------------------------------------------------------------------------------');
+console.log('FUNKCJE - funkcje zawsze robia tylko jedna rzecz');
 
+console.log('FUNKCJA ZWYKŁA:');
+
+function mojaFunkcja() { // zwykla funkcja - musi posiadac nazwe, słówko kluczowe this wskazuje na element, który funkcję wywołuje.
+    const name = 'Piotr';
+    const surname = 'Bambusowy';
+
+    // return name + ' ' + surname
+    return `${name} ${surname}`;    // kazda funkcja powinna cos zwracac - a wiec zawsze potrzebujemy "return". Kod po linijce return nie wykonuje sie nigdy!
+}
+
+mojaFunkcja(); // wywołanie zwykłej funkcji
+
+console.log('------------------------------------------------------------------------------------------');
+console.log('FUNKCJA ZWYKŁA Z PARAMETRAMI:');
+
+function mojaFunkcjaZParametrami(name = 'Piotr', surname = 'Bambusowy') {
+    return `${name} ${surname}`;    // kazda funkcja powinna cos zwracac - a wiec zawsze potrzebujemy "return". Kod po linijce return nie wykonuje sie nigdy!
+}
+
+mojaFunkcjaZParametrami(); // Piotr Bambusowy
+mojaFunkcjaZParametrami('Freya', 'Biegajaca'); // Freya Biegajaca
+
+console.log('------------------------------------------------------------------------------------------');
+console.log('FUNKCJA ZWYKŁA Z FAIL FAST:');
+
+function mojaFunkcjaZFailFast(name, surname) {
+    if (!name && !surname) { // warunek, sprawdzajacy czy name i surname jest - jesli one nie przyjda, to kompilator wejdzie do tego ifa i wyjdzie z funkcji po return
+        return;
+    }
+
+    return `${name} ${surname}`;    // kazda funkcja powinna cos zwracac - a wiec zawsze potrzebujemy "return". Kod po linijce return nie wykonuje sie nigdy!
+}
+
+mojaFunkcjaZFailFast(); // nic nie zostanie zwrocone, ale funkcja sie wykona - nie wywali kodu i produkcji
+mojaFunkcjaZFailFast('Freya', 'Biegajaca'); // Freya Biegajaca
+
+console.log('------------------------------------------------------------------------------------------');
+console.log('FUNKCJA STRZAŁKOWA:');
+
+const funkcjaStrzalkowa = (name = 'Piotr', surname = 'Bambusowy') => { // funkcja strzalkowa od ECMASCRIPT 2015 (6). Rózni się czym jest slowo kluczowe this dla tej funkcji. This wskazuje na obiekt, który zdefiniowal funkcje. Wnetrze funkcji dokladnie takie same jak w zwyklych funkcjach. Dokladnie tak samo z parametrami.
+    return <span style={{ fontSize: '16px', color: 'red', maxWidth: '100%' }}>{name} {surname}</span>
+};
+
+funkcjaStrzalkowa(); //zwroci <span>Piotr Bambusowy</span>
+
+<h1>{funkcjaStrzalkowa()}</h1> // zwroci <h1><span>Piotr Bambusowy</span></h1>
+
+console.log('------------------------------------------------------------------------------------------');
+console.log('IMPORTY ORAZ EXPORTY:');
+
+export function mojaFunkcjaExportowana() {}; // exportujemy te funkcje zwykla z pliku learning.js
+export const mojaFunkcjaStrzalkowaExportowana = () => {}; // exportujemy te funkcje strzalkowa z pliku learning.js
+
+function mojaFunkcjaExportowanaNaDole() {}; // exportujemy te funkcje zwykla z pliku learning.js
+const mojaFunkcjaStrzalkowaExportowanaNaDole = () => {}; // exportujemy te funkcje strzalkowa z pliku learning.js
+
+export { mojaFunkcjaExportowanaNaDole, mojaFunkcjaStrzalkowaExportowanaNaDole }; // jezeli w pliku jest bardzo duzo funkcji to exportujemy je tak.
+
+function mojaFunkcjaExportowanaNaDoleZwykla() {}; // exportujemy te funkcje zwykla z pliku learning.js
+const mojaFunkcjaStrzalkowaExportowanaNaDoleDefaultowa = () => {}; // exportujemy te funkcje strzalkowa z pliku learning.js
+
+// export { mojaFunkcjaExportowanaNaDole, mojaFunkcjaStrzalkowaExportowanaNaDole as default }; // jezeli mamy rozne elementy, ktore musza byc i default i zwykle
+
+function mojaFunkcjaExportowanaDefaultowo() {};
+export default mojaFunkcjaExportowanaDefaultowo; //taka forma exportow dobra do komponentow i modulow
+
+// TUTAJ JEST INNY PLIK JAVASCRIPT: dog.js - symulacja
+
+import { mojaFunkcjaExportowana, mojaFunkcjaStrzalkowaExportowana } from './learning.js'; // importujemy zawsze z nawiasami klamrowymi gdy export jest zwykly
+import mojaFunkcjaExportowanaDefaultowo from './learning.js';
