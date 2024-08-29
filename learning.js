@@ -123,7 +123,7 @@ function mojaFunkcjaZFailFast(name, surname) {
 mojaFunkcjaZFailFast(); // nic nie zostanie zwrocone, ale funkcja sie wykona - nie wywali kodu i produkcji
 mojaFunkcjaZFailFast('Freya', 'Biegajaca'); // Freya Biegajaca
 
-//! FUNKCJA Z ZASTOSOWANIEM OPTIONAL CHAINING:
+//! FUNKCJA ZWRACAJĄCA OBIEKT - ABY DOSTAĆ SIĘ DO WARTOŚCI ZWRACANEJ UZYWAJ OPTIONAL CHAINING:
 
 function funkcjaZwracajacaObiekt(name, surname) {
     if (!name || !surname) { // warunek, sprawdzajacy czy name i surname jest - jesli one nie przyjda, to kompilator wejdzie do tego ifa i wyjdzie z funkcji po return
@@ -136,7 +136,14 @@ function funkcjaZwracajacaObiekt(name, surname) {
 funkcjaZwracajacaObiekt(); // {}, bo wywołalismy funkcje bez zadnych parametrow - patrz linia 134;
 const result = funkcjaZwracajacaObiekt(); //result to {}
 result.name // w tym momencie poniewaz funkcja zwrocila pusty obiekt, to result nie ma zadnych kluczy i mamy CRASH APLIKACJI
+
+//! OPTIONAL CHAINING W WYNIKU FUNKCJI - CZYLI JAK SIĘ DOSTAĆ DO WYNIKU FUNKCJI FUNKCJAZWRACAJACAOBIEKT():
 result?.name // TAK ZAWSZE POWINNISMY ZAPISYWAC, BO TO ZWROCI PUSTY OBIEKT A JAK NAME BEDZIE DOSTEPNY TO ZWROCI NAME
+
+//! INNE SPRAWDZENIE CZY KLUCZ NAME ISTNIEJE - ZA POMOCA TYPEOF SPRAWDZAMY TYP ZMIENNEJ LUB FUNKCJI:
+if (typeof result === Object) {
+    return result?.name;
+}
 
 //! FUNKCJA STRZALKOWA:
 
@@ -312,3 +319,84 @@ switch (quest) {
         break;
 } // do quest zostanie przypisany 'sleeping';
 
+//! METODY ITEROWANIA PO TABLICACH - METODY ITERACJI DOBIERAMY W ZALEZNOSCI OD TEGO CO POTRZEBUJEMY:
+
+const tab = [1,2,3,4,5];
+const tab2 = [33,123,11,53,65];
+
+//! PĘTLA FOR (MOŻNA UZYWAC DO DOWOLNEGO CELU NAWET NIE W TABLICACH I OBIEKTACH):
+
+// for (warunekPoczatkowy; warunekZakonczenia; coMaSieDziacPoJednymPrzejsciuPetli) {}
+
+for (let i=0; i<tab.length; i++) {   // inkrementacja czyli i = i + 1, a skrocony zapis to i++
+    console.log('TAB ITERATOR: ', i); // pierwsze przejście 0, potem 1, 2, 3, 4
+    console.log('TAB ELEMENT: ', tab[i], tab2[i]); // pierwsze przejscie 1, 33. Drugie to 2, 123 itd.
+}
+
+//! PĘTLA FOR OF:
+
+for (const value of tab) {
+    console.log('TAB ELEMENT: ', value); // to sie wywola 5 razy i wypisze elementy tablicy po kolei: 1,2,3,4,5
+}
+
+//! METODY Z ECMASCRIPT 2015 (6):
+
+//! METODA TABLICOWA FOREACH:
+tab.forEach((value, i, tab) => { // forEach ma w funkcji strzałkowej jako parametr 3 elementy - wartosc iterowanego elementu, iterator oraz tablice iterowana.
+    console.log('TAB ELEMENT: ', value, i, tab); // pierwsze przejście wyswietli 1 (value 1 elementu) i 1 (iterator), [1,2,3,4,5].
+});
+
+// tak zapisujemy forEach jesli nie potrzebujemy iteratora i tablicy
+tab.forEach(value => {})
+
+// forEach - nie zwraca undefined, nie modyfikuje oryginalnej tablicy. Tą metode uzywamy np. gdy trzeba wywolac funkcje na elementach tablicy lub dokonac jakis dzialan bez zmian oryginalnej tablicy
+
+//! METODA TABLICOWA MAP:
+const mapResult = tab.map(value => {
+    console.log('TAB ELEMENT: ', value); // zwroci 1,2,3,4,5
+        return value + 1;
+}); // ale zmienna mapResult zwroci [2,3,4,5,6]
+
+// map - zwraca zawsze nową tablice zawsze tyle samo elementowa, nie modyfikuje oryginalu
+
+//! METODA TABLICOWA FILTER:
+tab.filter(value => {
+ //tu musi byc jakis warunek, czyli pewnie if :)
+    return value % 2 === 0;
+}); // zwroci tablice z dwoma elementami [2,4], jesli zaden warunek nie spelniony to zwraca pusta tablice []
+
+// filter - zwraca nowa tablice elementow, ktore spelniaja warunek. Nigdy nie wieksza niz oryginalna + nie modyfikuje oryginalnej tablicy
+
+//! METODY TABLICOWA REDUCE:
+tab.reduce((prev, current, i, array) => { // iterujemy po tablicy [1,2,3,4,5]
+    console.log('REDUCE: ', prev, current, i, array); // pierwsze przejscie: undefined, 1, 1, [1,2,3,4,5], drugie: 1, 2, 2, [1,2,3,4,5]
+    return prev + current; // 1 + 2 = 3, 3 + 3 = 6, 6 + 4 = 10, 10 + 5 = 15; Wynik koncowy = 15;
+})
+
+/* reduce - nie modyfikuje oryginalnej tablicy, zmniejsza tablice o ilosc elementow na ktorych pracowal czyli o prev i current,
+zwraca wynik jakiegos dzialania
+*/
+
+//! METODY TABLICOWA SOME - SPRAWDZA CZY PRZYNAJMNIEJ JEDEN ELEMENT SPELNIA WARUNEK:
+const some = tab.some((value, i, array) => {
+    return value % 2 === 0;
+}); // zwraca true, poniewaz value % 2 === 0 jest dla elementow [2,4] - zwraca zawsze booleana
+
+//! METODY TABLICOWA EVERY - SPRAWDZA CZY WSZYSTKIE ELEMENTY SPELNIAJA WARUNEK:
+const every = tab.every((value, i, array) => {
+    return value % 2 === 0;
+}); // zwraca false, poniewaz 1, 3 i 5 nie spelniaja warunku
+
+//! METODA FLAT SPLASZCZAJACA TABLICE:
+const strangeArr = [[1,2,3,4,5]]; // splaszcza, czyli usuwa jedna zewnatrzna tablice i zwraca zawartosc tablicy wewnatrz
+strangeArr.flat(); // [1,2,3,4,5]
+strangeArr[0] // tak mozna dostac sie do tablicy wewnatrz, ale nie jest to czesto stosowane
+
+//! METODA FLATMAP SPLASZCZAJACA METODA MAP - POLACZENIE METODY MAP I FLAT:
+strangeArr.flatMap(value => {
+    return value + 1; // metoda zwroci nowa tablice splaszczona o jeden poziom: [2,3,4,5,6];
+});
+
+//! METODY DODATKOWE - TYLKO INFORMACYJNIE:
+tab.find(value => {}) // zwraca pierwszy element spelniajacy warunek - czyli wartosc;
+tab.findIndex(value => {}) // zwraca index w tablicy pierwszego elementu spelniajacego warunek;
