@@ -339,6 +339,22 @@ for (const value of tab) {
     console.log('TAB ELEMENT: ', value); // to sie wywola 5 razy i wypisze elementy tablicy po kolei: 1,2,3,4,5
 }
 
+//! PĘTLA WHILE:
+
+let bonus = 1;
+
+while (bonus <= 2) { // pętla w ogóle zacznie działac jezeli warunek jest spełniony, pamietaj o zwiekszaniu lub zmniejszaniu warunku czyli inkrementacji i dekrementacji
+    console.log('BONUS: ', bonus); // wyswietli 1, 2
+    bonus++; // postinkrementacja, JEST KONIECZNA by pętla nie kręciła się w nieskończoność
+}
+
+//! PĘTLA DO-WHILE:
+
+do {
+    console.log('BONUS: ', bonus); // w petli do-while blok 'do' wykona sie chociaz raz. Wyswietli: 1, 2
+    bonus++;
+} while (bonus <= 2); // pętla kręci się dopóki warunek jest spełniony
+
 //! METODY Z ECMASCRIPT 2015 (6):
 
 //! METODA TABLICOWA FOREACH:
@@ -400,3 +416,81 @@ strangeArr.flatMap(value => {
 //! METODY DODATKOWE - TYLKO INFORMACYJNIE:
 tab.find(value => {}) // zwraca pierwszy element spelniajacy warunek - czyli wartosc;
 tab.findIndex(value => {}) // zwraca index w tablicy pierwszego elementu spelniajacego warunek;
+
+//! METODY ITEROWANIA PO OBIEKTACH - METODY ITERACJI DOBIERAMY W ZALEZNOSCI OD TEGO CO POTRZEBUJEMY:
+
+const object_1 = {
+    name: 'Uki',
+    surname: 'Rydzkowaty',
+    bornDate: '19.02.1985',
+    mentalAge: 78
+};
+
+for (const value in object_1) {
+    console.log('OBJECT ELEMENT: ', value); // to sie wywola 4 razy i wypisze elementy tablicy po kolei: name, surname, bornDate, mentalAge (czyli klucze)
+    console.log(object_1[value]); // w taki sposob wyciagamy wartosc z obiektu podczas iteracji, czyli Uki, Rydzkowaty, 19.02.1985, 78
+    return <span>{object_1[value]}</span>
+}
+
+//! METODY OBIEKTOWE DO TWORZENIA TABLICY Z ELEMENTOW OBIEKTU:
+
+//! OBJECT.KEYS - TABLICA Z KLUCZAMI:
+const keys = Object.keys(object_1); // tworzy i zwraca nowa tablice ['name', 'surname', 'bornDate', 'mentalAge']. Nie modyfikuje oryginalu
+
+//! OBJECT.VALUES - TABLICA Z WARTOSCIAMI:
+const values = Object.values(object_1); // technicznie dokładnie to samo co keys, ale wartosci to tablica z ['Uki', 'Rydzkowaty', '19.02.1985', 78]
+
+//! OBJECT.ENTRIES - TABLICA Z PARA KLUCZ - WARTOSC:
+const entries = Object.entries(object_1); // technicznie dokładnie to samo co metody powyzsze Object.
+// Zwraca tablice z: [{ name: 'Uki' }, { surname: 'Rydzkowaty' }, { bornDate: '19.02.1985' }, { mentalAge: 78 }]
+
+//! DOM - CZYLI DOCUMENT OBJECT MODEL - CZYLI REPREZENTACJA ELEMENTOW STRONY W POSTACI DRZEWA ZNACZNIKOW HTML
+
+const htmlFragment = <div className='main'>
+    <ul className='main__list'>
+        <li className='main__listElement main__listElement--selected'>Malteese</li>
+        <li className='main__listElement'>Pug</li>
+        <li className='main__listElement'>Husky</li>
+    </ul>
+    <h1 id='main__heading'>
+        I love all dogs and I hate freaking owners
+        <span className='main__iconContainer' data-testid='icon'>
+            <img className='main__icon' src='' alt='invisible dog' />
+        </span>
+    </h1>
+</div>
+
+//! CHWYTANIE ELEMENTOW HTML:
+
+const htmlCollection_1 = document.getElementsByClassName('main__listElement'); // po klasie, zlapie wszystkie elementy z klasa main_listElement. Zwraca HTMLCollection - to jest tablica i mozemy po niej iterowac
+const htmlCollection_2 = document.getElementsByTagName('li') // po tagu, zlapie wszystkie tagi <li></li> z tym co wsrodku i zwroci tablice HTMLCollection;
+document.getElementById('main__heading'); // po id, sluzy tylko do lapania po ID i zwraca 1 element zawsze i pierwszy
+
+// Query Selector przyjmuje SelectorCSS
+document.querySelector('.main') // po klasie - czyli zlapie calego diva z klasa main oraz wszystko co w srodku
+document.querySelector('li') // po tagu - czyli jezeli jest wiele takich samych znacznikow, to zlapie pierwszy czyli ten z Malteese
+document.querySelector('#main__heading'); // po id - czyli lapiesz pierwszy element, ktory zawiera wybrane id (h1 w tym przypadku)
+
+const nodeList = document.querySelectorAll('li'); // po tagu, zwroci wszystkie tagi <li></li>. Zwroci tablice NodeList (mozna iterowac tak jak przy HTMLCollection)
+
+//! HTMLCOLLECTION A NODELIST - O CO CHODZI:
+
+// HTMLCollection a NodeList - HTML Collection to zywa (live) lista elementow z DOM, czyli kazda zmiana w DOM jest odzwierciedlona w kolekcji. 
+// NodeList - zywa (live) lub martwa (statyczna) lista elementow z DOM, nie zmieniaja swoich atrybutow.
+
+// HTMLCollection dostęp do elementow ===> htmlCollection_1[0];
+// NodeList dostęp do elementow ===> nodes[0] TOTOTOTOTO
+
+// HTMLCollection - iterowanie, tylko for. Nie obsluguje metod tablicowych.
+// NodeList - iterowanie, tylko forEach. Nie obsluguje niczego wiecej, chyba ze przekonwertujemy nodeList na tablice - wtedy wszystkie metody tablicowe
+
+//! KONWERTOWANIE NODELIST NA TABLICE + DESTRUKTURYZACJA (CZYLI OPERATORY REST I SPREAD):
+
+[...nodeList].filter() // przekonwertowanie NodeList na tablice, czyli kazdy element nodeList jest wyciagany z listy i po kolei tak jak byl wyciagany jest wkladany do tablicy
+const arr1 = [1,2,3];
+const arr2 = [4,5];
+const arr3 = [...arr1, ...arr2]; // [1,2,3,4,5] - OPERATOR SPREAD - robia to samo (REST, SPREAD), ale SPREAD wykorzystuje sie w tablicach. Powoduje wyciagniecie elementow z tablicy i przelozenie ich do nowej tablicy
+const funk = (a, b, ...props) => {
+    calculator(props);
+}  // OPERATOR REST - uzywa sie w funkcjach jako ostatni parametr, ma on za zadanie zgrupowac parametry, ktorych nie potrzebujesz
+
