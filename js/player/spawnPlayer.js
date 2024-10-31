@@ -1,5 +1,5 @@
 import { BOARD_SIZE } from "../../game_config.js";
-import { drawNumbers } from "../utlis/drawNumbers.js";
+import { drawNumbers } from "../utils/drawNumbers.js";
 
 export function spawnPlayer() {
   const player = document.createElement("div");
@@ -11,7 +11,7 @@ export function spawnPlayer() {
   player.setAttribute("data-position", randomPlayerPosition);
 
   const spawnField = document.querySelector(
-    `[data-testid="${randomPlayerPosition}"]`
+    `[data-fieldid="${randomPlayerPosition}"]`
   );
 
   spawnField.appendChild(player);

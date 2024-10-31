@@ -10,7 +10,7 @@ export function generateBoard(fields) {
 
     field.classList.add("board__field");
 
-    field.setAttribute("data-testid", i + 1);
+    field.setAttribute("data-fieldid", i + 1);
 
     board.appendChild(field); //appendChild umieszcza element field wewnątrz elementu rodzica board
   }
