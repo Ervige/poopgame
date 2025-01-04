@@ -8,10 +8,18 @@ export function movePlayer() {
 
     const direction = GAME_CONTROLS[event.key];
 
+    const dog = document.querySelector(".dog");
+
+    const currentDogPosition = +dog.getAttribute("data-position");
+
     if (direction) {
       const playerPosition = player.getAttribute("data-position");
 
       const newPlayerPosition = calculatePosition(playerPosition, direction);
+
+      if (newPlayerPosition === currentDogPosition) {
+        return;
+      }
 
       const newPlayerField = document.querySelector(
         `[data-fieldid='${newPlayerPosition}']`
