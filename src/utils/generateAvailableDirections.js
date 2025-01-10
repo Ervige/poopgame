@@ -1,4 +1,4 @@
-import { DIRECTION } from "src/game_config.js";
+import { BOARD_SIZE, DIRECTION } from "src/game_config.js";
 
 export const generateAvailableDirections = (position) => {
   if (!position) {
@@ -26,7 +26,7 @@ export const generateAvailableDirections = (position) => {
     availableDirections.push(DIRECTION.LEFT);
   }
 
-  if (right <= 100 && right !== playerPosition && !lastElementInRow) {
+  if (right <= BOARD_SIZE && right !== playerPosition && !lastElementInRow) {
     availableDirections.push(DIRECTION.RIGHT);
   }
 
@@ -34,7 +34,7 @@ export const generateAvailableDirections = (position) => {
     availableDirections.push(DIRECTION.UP);
   }
 
-  if (down <= 100 && down !== playerPosition) {
+  if (down <= BOARD_SIZE && down !== playerPosition) {
     availableDirections.push(DIRECTION.DOWN);
   }
 
