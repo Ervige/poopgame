@@ -1,9 +1,9 @@
 const importMap = {
   imports: {
     "src/": "./src/",
-    "board/": "./src/js/board/",
-    "dog/": "./src/js/dog/",
-    "player/": "./src/js/player/",
+    "board/": "./src/modules/board/",
+    "dog/": "./src/modules/dog/",
+    "player/": "./src/modules/player/",
     "utils/": "./src/utils/",
   },
 };
