@@ -1,6 +1,7 @@
-import { BOARD_SIZE } from "../../game_config.js";
-import { drawNumbers } from "../utils/drawNumbers.js";
-import { calculatePositionFromPlayer } from "../utils/calculatePositionFromPlayer.js";
+import { BOARD_SIZE } from "src/game_config.js";
+
+import { drawNumbers } from "utils/drawNumbers.js";
+import { spawnAwayFromPlayer } from "utils/spawnAwayFromPlayer.js";
 
 export function spawnDog() {
   const dog = document.createElement("div");
@@ -14,7 +15,7 @@ export function spawnDog() {
   let randomDogPosition = drawNumbers(BOARD_SIZE, currentPlayerPosition);
 
   if (randomDogPosition === +currentPlayerPosition) {
-    randomDogPosition = calculatePositionFromPlayer(randomDogPosition);
+    randomDogPosition = spawnAwayFromPlayer(randomDogPosition);
   }
 
   dog.setAttribute("data-position", randomDogPosition);

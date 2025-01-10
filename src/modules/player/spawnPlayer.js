@@ -1,5 +1,6 @@
-import { BOARD_SIZE } from "../../game_config.js";
-import { drawNumbers } from "../utils/drawNumbers.js";
+import { BOARD_SIZE } from "src/game_config.js";
+
+import { drawNumbers } from "utils/drawNumbers.js";
 
 export function spawnPlayer() {
   const player = document.createElement("div");

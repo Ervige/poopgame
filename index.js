@@ -1,1 +1,1 @@
-import "./game_engine.js";
+import "src/game_engine.js";

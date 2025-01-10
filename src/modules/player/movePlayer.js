@@ -1,13 +1,12 @@
-import { GAME_CONTROLS } from "../../game_config.js";
+import { GAME_CONTROLS } from "src/game_config.js";
 
-import { calculatePosition } from "../utils/calculatePosition.js";
+import { calculatePosition } from "utils/calculatePosition.js";
 
 export function movePlayer() {
   document.addEventListener("keydown", function (event) {
-    const player = document.querySelector(".player");
-
     const direction = GAME_CONTROLS[event.key];
 
+    const player = document.querySelector(".player");
     const dog = document.querySelector(".dog");
 
     const currentDogPosition = +dog.getAttribute("data-position");

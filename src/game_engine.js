@@ -1,10 +1,10 @@
-import { BOARD_SIZE, DOG_CHANGE_DIRECTION_TIME } from "./game_config.js";
+import { BOARD_SIZE, DOG_CHANGE_DIRECTION_TIME } from "src/game_config.js";
 
-import { generateBoard } from "./js/board/generateBoard.js";
-import { spawnDog } from "./js/dog/spawnDog.js";
-import { moveDog } from "./js/dog/moveDog.js";
-import { movePlayer } from "./js/player/movePlayer.js";
-import { spawnPlayer } from "./js/player/spawnPlayer.js";
+import { generateBoard } from "board/generateBoard.js";
+import { spawnDog } from "dog/spawnDog.js";
+import { moveDog } from "dog/moveDog.js";
+import { movePlayer } from "player/movePlayer.js";
+import { spawnPlayer } from "player/spawnPlayer.js";
 
 /* 1. GENERATE BOARD */
 generateBoard(BOARD_SIZE);
@@ -12,7 +12,6 @@ generateBoard(BOARD_SIZE);
 const isBoardExist = document.querySelector(`[data-fieldid="${BOARD_SIZE}"]`);
 
 let isPlayerExist;
-
 let isDogExist;
 
 /* 2. SPAWN PLAYER */

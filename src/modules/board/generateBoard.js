@@ -12,6 +12,6 @@ export function generateBoard(fields) {
 
     field.setAttribute("data-fieldid", i + 1);
 
-    board.appendChild(field); //appendChild umieszcza element field wewnątrz elementu rodzica board
+    board.appendChild(field);
   }
 }

@@ -1,4 +1,4 @@
-import { DIRECTION, BOARD_SIZE } from "../../game_config.js";
+import { DIRECTION, BOARD_SIZE } from "src/game_config.js";
 
 export function calculatePosition(position, direction) {
   const calculatedUnit = Math.sqrt(BOARD_SIZE);
