@@ -192,8 +192,8 @@ export default mojaFunkcjaExportowanaDefaultowo; //taka forma exportow dobra do 
 import {
   mojaFunkcjaExportowana,
   mojaFunkcjaStrzalkowaExportowana,
-} from "./learning.js"; // importujemy zawsze z nawiasami klamrowymi gdy export jest zwykly
-import mojaFunkcjaExportowanaDefaultowo from "./learning.js";
+} from "./docs.js"; // importujemy zawsze z nawiasami klamrowymi gdy export jest zwykly
+import mojaFunkcjaExportowanaDefaultowo from "./docs.js";
 
 //! OPERATORY:
 
