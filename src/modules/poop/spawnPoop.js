@@ -11,8 +11,6 @@ export function spawnPoop(position) {
 
   const newPoopField = document.querySelector(`[data-fieldid='${position}']`);
 
-  console.log("newPoopField", newPoopField);
-
   if (newPoopField) {
     poop.setAttribute("data-position", position);
 
