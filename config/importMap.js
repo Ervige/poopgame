@@ -4,6 +4,7 @@ const importMap = {
     "board/": "./src/modules/board/",
     "dog/": "./src/modules/dog/",
     "player/": "./src/modules/player/",
+    "poop/": "./src/modules/poop/",
     "utils/": "./src/utils/",
   },
 };

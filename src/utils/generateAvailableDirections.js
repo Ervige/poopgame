@@ -9,7 +9,7 @@ export const generateAvailableDirections = (position) => {
 
   // Pobierz pozycję gracza
   const player = document.querySelector(".player");
-  const playerPosition = Number(player.getAttribute("data-position"));
+  const playerPosition = +player.getAttribute("data-position");
 
   // Wylicz potencjalne pozycje w każdym kierunku
   const left = position - 1;

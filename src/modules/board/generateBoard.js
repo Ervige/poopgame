@@ -9,7 +9,6 @@ export function generateBoard(fields) {
     const field = document.createElement("li");
 
     field.classList.add("board__field");
-
     field.setAttribute("data-fieldid", i + 1);
 
     board.appendChild(field);
