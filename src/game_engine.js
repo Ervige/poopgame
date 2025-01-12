@@ -1,10 +1,15 @@
-import { BOARD_SIZE, DOG_CHANGE_DIRECTION_TIME } from "src/game_config.js";
+import {
+  BOARD_SIZE,
+  DOG_CHANGE_DIRECTION_TIME,
+  DOG_POOP_SPAWN_TIME,
+} from "src/game_config.js";
 
 import { generateBoard } from "board/generateBoard.js";
 import { spawnDog } from "dog/spawnDog.js";
 import { moveDog } from "dog/moveDog.js";
 import { movePlayer } from "player/movePlayer.js";
 import { spawnPlayer } from "player/spawnPlayer.js";
+import { spawnPoop } from "poop/spawnPoop.js";
 
 /* 1. GENERATE BOARD */
 generateBoard(BOARD_SIZE);
@@ -35,5 +40,8 @@ if (isBoardExist && isPlayerExist) {
   /* 5. MOVE DOG */
   if (isDogExist) {
     setInterval(moveDog, DOG_CHANGE_DIRECTION_TIME);
+
+    /* 6. SPAWN POOP */
+    setInterval(spawnPoop, DOG_POOP_SPAWN_TIME);
   }
 }

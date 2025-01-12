@@ -25,7 +25,18 @@ export function spawnDog() {
   );
 
   if (spawnField) {
+    const isPoop = !!spawnField.querySelector(".poop");
+
     spawnField.appendChild(dog);
+    if (isPoop) {
+      const poop = document.createElement("div");
+
+      poop.classList.add("poop");
+
+      poop.setAttribute("data-position", randomDogPosition);
+
+      spawnField.appendChild(poop);
+    }
   } else {
     console.error(`Field with data-fieldid="${randomDogPosition}" not found.`);
   }
